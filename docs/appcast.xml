@@ -8,6 +8,20 @@
 
         <item>
             <title>F1Widget 1.4</title>
+            <pubDate>Thu, 21 May 2026 01:31:00 +0700</pubDate>
+            <sparkle:version>1779301847</sparkle:version>
+            <sparkle:shortVersionString>1.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.3</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h3>F1Widget 1.4</h3><p>See the <a href="https://github.com/tuanle03/F1Widget/releases/tag/v1.4">release notes</a> on GitHub.</p>]]></description>
+            <enclosure
+                url="https://github.com/tuanle03/F1Widget/releases/download/v1.4/F1Widget.dmg"
+                sparkle:edSignature="Vv0WqMYMrpW/BnF5s1c+EvM/Kdfp1a7N7DIzs8OFFIjegRzgwDcZb8tsyxM3TzhcKPEy9WA822u3b9Zi5mv6CA=="
+                length="3481339"
+                type="application/octet-stream" />
+        </item>
+
+        <item>
+            <title>F1Widget 1.4</title>
             <pubDate>Thu, 21 May 2026 01:12:32 +0700</pubDate>
             <sparkle:version>1779300744</sparkle:version>
             <sparkle:shortVersionString>1.4</sparkle:shortVersionString>
