@@ -25,6 +25,7 @@ struct MenuBarLabel: View {
 
 struct MenuBarContent: View {
     var model: DashboardModel
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -117,14 +118,13 @@ struct MenuBarContent: View {
     }
 
     private func openMainWindow() {
+        // Promote back to Dock-visible mode so the window has an app context.
+        if let delegate = NSApp.delegate as? AppDelegate {
+            NSApp.setActivationPolicy(.regular)
+            _ = delegate
+        }
         NSApp.activate(ignoringOtherApps: true)
-        for window in NSApp.windows where window.canBecomeMain {
-            window.makeKeyAndOrderFront(nil)
-            return
-        }
-        // Fall back: open via URL scheme of the app process
-        if let url = URL(string: "f1widget://open") {
-            NSWorkspace.shared.open(url)
-        }
+        // Recreate or focus the main window.
+        openWindow(id: "main")
     }
 }

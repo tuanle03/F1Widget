@@ -26,11 +26,18 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 18) {
                 menuBarSection
                 notificationSection
+                updatesSection
                 aboutSection
             }
             .padding(20)
         }
         .task { notificationStatus = await NotificationScheduler.authorizationStatus() }
+    }
+
+    private var updatesSection: some View {
+        CardSection(title: "UPDATES") {
+            UpdaterSettingsBlock()
+        }
     }
 
     // MARK: Menu Bar section

@@ -10,11 +10,12 @@ import SwiftUI
 
 @main
 struct F1WidgetApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var model = DashboardModel()
     @AppStorage(AppSettingsKey.showInMenuBar) private var showInMenuBar = true
 
     var body: some Scene {
-        WindowGroup {
+        Window("F1 Dashboard", id: "main") {
             ContentView(model: model)
         }
         .windowResizability(.contentSize)

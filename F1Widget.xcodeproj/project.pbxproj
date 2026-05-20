@@ -10,6 +10,7 @@
 		AF857B942FBD9B21003F4E58 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF857B932FBD9B21003F4E58 /* WidgetKit.framework */; };
 		AF857B962FBD9B21003F4E58 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF857B952FBD9B21003F4E58 /* SwiftUI.framework */; };
 		AF857BA12FBD9B22003F4E58 /* F1WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AF857B912FBD9B21003F4E58 /* F1WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AF857BC72FBE25CC003F4E58 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = AF857BC62FBE25CC003F4E58 /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF857BC72FBE25CC003F4E58 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +171,7 @@
 			);
 			name = F1Widget;
 			packageProductDependencies = (
+				AF857BC62FBE25CC003F4E58 /* Sparkle */,
 			);
 			productName = F1Widget;
 			productReference = AF857B6B2FBD91EB003F4E58 /* F1Widget.app */;
@@ -224,6 +227,9 @@
 			);
 			mainGroup = AF857B622FBD91EB003F4E58;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AF857BC52FBE2566003F4E58 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF857B6C2FBD91EB003F4E58 /* Products */;
 			projectDirPath = "";
@@ -418,7 +424,8 @@
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = F1Widget/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -460,7 +467,8 @@
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = F1Widget/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -590,6 +598,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AF857BC52FBE2566003F4E58 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF857BC62FBE25CC003F4E58 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF857BC52FBE2566003F4E58 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF857B632FBD91EB003F4E58 /* Project object */;
 }
