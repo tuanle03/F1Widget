@@ -15,11 +15,20 @@ struct F1WidgetEntryView: View {
     var body: some View {
         content
             .containerBackground(for: .widget) {
-                LinearGradient(
-                    colors: [F1Theme.card, Color.black],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+                ZStack {
+                    if let country = entry.weekend?.country {
+                        CountryGradient.gradient(for: country)
+                        // Subtle dark overlay so text and track outline stay readable
+                        // on bright flag palettes (e.g. yellow / white sections).
+                        Color.black.opacity(0.40)
+                    } else {
+                        LinearGradient(
+                            colors: [F1Theme.card, Color.black],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    }
+                }
             }
             .foregroundStyle(.white)
     }

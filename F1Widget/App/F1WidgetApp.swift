@@ -10,11 +10,21 @@ import SwiftUI
 
 @main
 struct F1WidgetApp: App {
+    @State private var model = DashboardModel()
+    @AppStorage(AppSettingsKey.showInMenuBar) private var showInMenuBar = true
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(model: model)
         }
         .windowResizability(.contentSize)
+
+        MenuBarExtra(isInserted: $showInMenuBar) {
+            MenuBarContent(model: model)
+        } label: {
+            MenuBarLabel()
+        }
+        .menuBarExtraStyle(.window)
     }
 }
 
@@ -91,19 +101,21 @@ final class DashboardModel {
 // MARK: - Root view
 
 struct ContentView: View {
-    @State private var model = DashboardModel()
+    @Bindable var model: DashboardModel
     @State private var tab: Tab = .schedule
 
     enum Tab: String, CaseIterable, Identifiable {
         case schedule = "Schedule"
         case results  = "Results"
         case standings = "Standings"
+        case settings = "Settings"
         var id: String { rawValue }
         var icon: String {
             switch self {
             case .schedule:  return "calendar"
             case .results:   return "flag.checkered"
             case .standings: return "trophy"
+            case .settings:  return "gearshape"
             }
         }
     }
@@ -118,7 +130,22 @@ struct ContentView: View {
         .frame(width: 720, height: 820)
         .background(AppTheme.background)
         .foregroundStyle(.white)
-        .task { if model.weekends.isEmpty { await model.loadAll() } }
+        .task {
+            if model.weekends.isEmpty { await model.loadAll() }
+            await rescheduleNotificationsIfNeeded()
+        }
+        .onChange(of: model.weekends.count) { _, _ in
+            Task { await rescheduleNotificationsIfNeeded() }
+        }
+    }
+
+    private func rescheduleNotificationsIfNeeded() async {
+        guard AppSettings.notificationsEnabled, !model.weekends.isEmpty else { return }
+        await NotificationScheduler.reschedule(
+            weekends: model.weekends,
+            leadMinutes: AppSettings.notificationLeadMinutes,
+            filter: AppSettings.notifySessionFilter
+        )
     }
 
     // MARK: Header
@@ -189,6 +216,7 @@ struct ContentView: View {
             case .schedule:  ScheduleView(model: model)
             case .results:   ResultsView(model: model)
             case .standings: StandingsView(model: model)
+            case .settings:  SettingsView(model: model)
             }
         }
     }
@@ -586,6 +614,8 @@ private struct RaceResultsTable: View {
                 HStack(spacing: 10) {
                     PositionPill(position: r.position)
                     TeamBadge(constructorId: r.constructor.constructorId, size: 30)
+                    DriverNumberPill(number: r.driver.permanentNumber,
+                                     constructorId: r.constructor.constructorId)
                     VStack(alignment: .leading, spacing: 0) {
                         Text("\(r.driver.givenName) \(r.driver.familyName)")
                             .font(.callout.weight(.medium))
@@ -636,6 +666,8 @@ private struct QualifyingTable: View {
                 HStack(spacing: 10) {
                     PositionPill(position: r.position)
                     TeamBadge(constructorId: r.constructor.constructorId, size: 30)
+                    DriverNumberPill(number: r.driver.permanentNumber,
+                                     constructorId: r.constructor.constructorId)
                     VStack(alignment: .leading, spacing: 0) {
                         Text("\(r.driver.givenName) \(r.driver.familyName)")
                             .font(.callout.weight(.medium))
@@ -684,6 +716,8 @@ struct StandingsView: View {
                             .foregroundStyle(AppTheme.subtle)
                             .frame(width: 24, alignment: .trailing)
                         TeamBadge(constructorId: d.constructors.first?.constructorId ?? "", size: 36)
+                        DriverNumberPill(number: d.driver.permanentNumber,
+                                         constructorId: d.constructors.first?.constructorId ?? "")
                         VStack(alignment: .leading, spacing: 1) {
                             Text("\(d.driver.givenName) \(d.driver.familyName)")
                                 .font(.callout.weight(.semibold))
@@ -731,6 +765,20 @@ struct StandingsView: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - Driver number (permanent racing number, shown in team color)
+
+struct DriverNumberPill: View {
+    let number: String?
+    let constructorId: String
+
+    var body: some View {
+        Text(number ?? "—")
+            .font(.system(size: 17, weight: .black, design: .rounded).monospacedDigit().italic())
+            .foregroundStyle(ConstructorColors.color(forConstructorId: constructorId))
+            .frame(width: 32, alignment: .center)
     }
 }
 

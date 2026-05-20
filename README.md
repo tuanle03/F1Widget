@@ -19,6 +19,21 @@ A minimal F1 dashboard + desktop widgets for macOS. Shows the next Grand Prix, f
 - **Small** — flag + Round chip + GP name + track outline + live countdown.
 - **Medium** — two-column layout: track outline on the left, session times on the right + next-session countdown.
 - **Large** — full dashboard: track + sessions + WDC top 5 with team logos.
+- Country-themed gradient background (per host nation).
+
+### Menu Bar
+- Always-visible F1 icon in the menu bar.
+- Click → popover with the next weekend, live countdown, and the full session list.
+- Quick actions: Refresh, Open App, Quit.
+
+### Notifications
+- Local banner notifications fire shortly before each session (works on lock screen too).
+- Choose lead time (5 / 10 / 15 / 30 / 60 min) and which sessions to be alerted for (All / Quali + Race / Race only).
+
+### Settings
+- Toggle the menu bar icon and its countdown text.
+- Toggle notifications, lead time, and session filter.
+- Driver numbers are shown in the team color throughout the dashboard.
 
 ## Requirements
 
