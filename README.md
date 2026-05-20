@@ -6,6 +6,8 @@
 
 A minimal F1 dashboard + desktop widgets for macOS. Shows the next Grand Prix, full session schedule in your local time, driver and constructor standings, and per-race Race/Qualifying/Sprint results. Built natively with SwiftUI + WidgetKit. Data from the [jolpica-f1 API](https://github.com/jolpica/jolpica-f1) (Ergast-compatible). Track outlines come from the [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits) MIT-licensed GeoJSON dataset.
 
+<img width="1920" height="1080" alt="Screenshot 2026-05-20 at 17 12 26 (2)" src="https://github.com/user-attachments/assets/cd2ecffe-6a74-4bf1-b7ca-29edb789109a" />
+
 ## Features
 
 ### Host app
