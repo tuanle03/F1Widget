@@ -42,11 +42,13 @@ if [ -z "$SIGN_UPDATE" ]; then
 fi
 
 echo "▶︎ Bumping version to $VERSION (build $BUILD)"
-cd F1Widget.xcodeproj/.. # agvtool runs from project dir
-xcrun agvtool new-marketing-version "$VERSION" > /dev/null
-xcrun agvtool new-version -all "$BUILD" > /dev/null
+PBX="F1Widget.xcodeproj/project.pbxproj"
+# Replace MARKETING_VERSION = X.Y; and CURRENT_PROJECT_VERSION = N; lines.
+sed -i '' -E "s/MARKETING_VERSION = [^;]+;/MARKETING_VERSION = $VERSION;/g" "$PBX"
+sed -i '' -E "s/CURRENT_PROJECT_VERSION = [^;]+;/CURRENT_PROJECT_VERSION = $BUILD;/g" "$PBX"
 
 echo "▶︎ Building Release"
+export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
 xcodebuild -project F1Widget.xcodeproj -scheme F1Widget -configuration Release \
     -derivedDataPath "$DERIVED"/F1Widget-release build > /tmp/f1widget-build.log 2>&1 || {
     echo "❌ Build failed. Tail of log:"
@@ -92,7 +94,7 @@ ENTRY=$(cat <<EOF
             <sparkle:version>$BUILD</sparkle:version>
             <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.3</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h3>F1Widget $VERSION</h3><p>See <a href="https://github.com/tuanle03/F1Widget/releases/tag/v$VERSION">release notes</a> for what's new.</p>]]></description>
+            <description><![CDATA[<h3>F1Widget $VERSION</h3><p>See the <a href="https://github.com/tuanle03/F1Widget/releases/tag/v$VERSION">release notes</a> on GitHub.</p>]]></description>
             <enclosure
                 url="https://github.com/tuanle03/F1Widget/releases/download/v$VERSION/F1Widget.dmg"
                 sparkle:edSignature="$SIGNATURE"
@@ -102,25 +104,28 @@ ENTRY=$(cat <<EOF
 EOF
 )
 
-# Use Python to insert (sed multi-line is fiddly).
-python3 - "docs/appcast.xml" <<PYEOF
-import sys
-path = sys.argv[1]
+# Use Python to insert. Pass via env vars so the bash heredoc doesn't try to
+# interpolate XML payload (which contains quotes, slashes, etc.).
+ENTRY="$ENTRY" VERSION="$VERSION" python3 - <<'PYEOF'
+import os
+entry = os.environ["ENTRY"]
+version = os.environ["VERSION"]
+path = "docs/appcast.xml"
 text = open(path).read()
 marker = "<description>Latest releases of F1Widget for macOS</description>"
-entry = '''$ENTRY'''.strip("\n")
-# Place new entry right after the channel metadata.
 needle = marker + "\n        <language>en</language>\n"
 replacement = needle + "\n" + entry + "\n"
+if needle not in text:
+    raise SystemExit("Marker not found in appcast.xml; please edit manually.")
 text = text.replace(needle, replacement, 1)
 open(path, "w").write(text)
-print("Inserted entry for $VERSION")
+print(f"Inserted entry for {version}")
 PYEOF
 
 echo "▶︎ Committing and tagging"
 git add F1Widget.xcodeproj/project.pbxproj F1Widget.dmg docs/appcast.xml F1Widget/Info.plist 2>/dev/null || true
 git commit -m "Release v$VERSION" || true
-git tag -f "v$VERSION"
+git tag -fa "v$VERSION" -m "F1Widget v$VERSION"
 
 echo
 echo "✅ Done."
