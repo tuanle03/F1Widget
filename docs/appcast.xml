@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>F1Widget</title>
+        <link>https://tuanle03.github.io/F1Widget/appcast.xml</link>
+        <description>Latest releases of F1Widget for macOS</description>
+        <language>en</language>
+
+        <!--
+        Template entry. After running `sign_update F1Widget.dmg`, paste the
+        sparkle:edSignature, sparkle:version, and the asset URL below.
+
+        <item>
+            <title>F1Widget 1.2</title>
+            <pubDate>Wed, 21 May 2026 00:30:00 +0700</pubDate>
+            <sparkle:version>1.2</sparkle:version>
+            <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.3</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <h3>What's new</h3>
+                <ul>
+                    <li>Auto-update via Sparkle</li>
+                    <li>Bigger driver numbers in widget</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://github.com/tuanle03/F1Widget/releases/download/v1.2/F1Widget.dmg"
+                sparkle:edSignature="PASTE_SIGNATURE_HERE"
+                length="2607964"
+                type="application/octet-stream" />
+        </item>
+        -->
+    </channel>
+</rss>
