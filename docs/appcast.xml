@@ -6,6 +6,20 @@
         <description>Latest releases of F1Widget for macOS</description>
         <language>en</language>
 
+        <item>
+            <title>F1Widget 1.2</title>
+            <pubDate>Thu, 21 May 2026 00:58:14 +0700</pubDate>
+            <sparkle:version>1779299887</sparkle:version>
+            <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.3</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h3>F1Widget 1.2</h3><p>See the <a href="https://github.com/tuanle03/F1Widget/releases/tag/v1.2">release notes</a> on GitHub.</p>]]></description>
+            <enclosure
+                url="https://github.com/tuanle03/F1Widget/releases/download/v1.2/F1Widget.dmg"
+                sparkle:edSignature="TEeKlZ0hPWEzoM3hZwad9xtN65FRzOdGFwSvDwTiI7yix+D4OU4EEgB5ls2UH6RXwpuqQGMYm/n3pXjcz8soBw=="
+                length="3480530"
+                type="application/octet-stream" />
+        </item>
+
         <!--
         Template entry. After running `sign_update F1Widget.dmg`, paste the
         sparkle:edSignature, sparkle:version, and the asset URL below.
