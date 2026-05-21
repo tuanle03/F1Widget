@@ -1,25 +1,31 @@
-# F1 Widget for macOS
-
 <p align="center">
   <img src="logo.png" width="160" alt="F1 Widget logo" />
 </p>
 
 A minimal F1 dashboard + desktop widgets for macOS. Shows the next Grand Prix, full session schedule in your local time, driver and constructor standings, and per-race Race/Qualifying/Sprint results. Built natively with SwiftUI + WidgetKit. Data from the [jolpica-f1 API](https://github.com/jolpica/jolpica-f1) (Ergast-compatible). Track outlines come from the [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits) MIT-licensed GeoJSON dataset.
 
-<img width="1920" height="1080" alt="Screenshot 2026-05-20 at 17 12 26 (2)" src="https://github.com/user-attachments/assets/cd2ecffe-6a74-4bf1-b7ca-29edb789109a" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-21 at 09 53 28 (2)" src="https://github.com/user-attachments/assets/4d23bf58-a596-42b8-9723-536208b20f9a" />
 
 ## Features
 
 ### Host app
 - **Schedule tab** — Hero card with country gradient, satellite Map (MapKit) + accurate track outline rendered from GeoJSON, full session list and live countdown to the next session.
+<img width="1920" height="1080" alt="Screenshot 2026-05-21 at 09 54 21 (2)" src="https://github.com/user-attachments/assets/983a75ec-2f5d-4b70-abd2-535e47216b7b" />
+
 - **Results tab** — Every completed race of the current season; tap a card to load Race / Qualifying / Sprint results on demand. Gold / silver / bronze pills for top-3 finishers, real team color stripes.
+
+<img width="1920" height="1080" alt="Screenshot 2026-05-21 at 09 54 28 (2)" src="https://github.com/user-attachments/assets/7402438f-3ae3-4f3d-ae80-046d13998d9f" />
+
 - **Standings tab** — WDC and WCC tables with real team logos.
+
+<img width="1920" height="1080" alt="Screenshot 2026-05-21 at 09 54 32 (2)" src="https://github.com/user-attachments/assets/e4d336e5-5e63-4816-baef-b032d08a982c" />
 
 ### Desktop widgets (Small / Medium / Large)
 - **Small** — flag + Round chip + GP name + track outline + live countdown.
 - **Medium** — two-column layout: track outline on the left, session times on the right + next-session countdown.
 - **Large** — full dashboard: track + sessions + WDC top 5 with team logos.
 - Country-themed gradient background (per host nation).
+<img width="1920" height="1080" alt="Screenshot 2026-05-21 at 09 53 50 (2)" src="https://github.com/user-attachments/assets/542c8f34-d961-43dc-8087-343e13fc1662" />
 
 ### Menu Bar
 - Always-visible F1 icon in the menu bar.
@@ -34,6 +40,8 @@ A minimal F1 dashboard + desktop widgets for macOS. Shows the next Grand Prix, f
 - Toggle the menu bar icon and its countdown text.
 - Toggle notifications, lead time, and session filter.
 - Driver numbers are shown in the team color throughout the dashboard.
+
+<img width="1920" height="1080" alt="Screenshot 2026-05-21 at 09 54 39 (2)" src="https://github.com/user-attachments/assets/7c41ecf3-530c-422c-a6ea-b0967907dc0b" />
 
 ## Requirements
 
